@@ -221,12 +221,12 @@ export default function App() {
       )}
 
       {/* Top Bar Contract (3 zones) */}
-      <header className="border-b border-white/[0.08] backdrop-blur-md sticky top-0 z-40 bg-[#07080c]/85">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <header className="border-b border-white/[0.08] backdrop-blur-md sticky top-0 z-40 bg-[#07080c]/90">
+        <div className="max-w-5xl mx-auto px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Zone 1: Single text wordmark with official PFP */}
           <a
             href="/"
-            className="font-display font-bold text-base sm:text-lg md:text-xl tracking-tight text-white hover:text-amber-200 transition-colors flex items-center gap-2 sm:gap-2.5 shrink-0"
+            className="font-display font-bold text-base sm:text-lg md:text-xl tracking-tight text-white hover:text-amber-200 transition-colors flex items-center gap-2 sm:gap-2.5 min-w-0 shrink"
           >
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-amber-500/40 p-[1.5px] bg-gradient-to-tr from-amber-600 via-rose-500 to-indigo-600 shrink-0">
               <img
@@ -239,8 +239,8 @@ export default function App() {
             <span className="truncate">Velune Visuals</span>
           </a>
 
-          {/* Zone 2: Navigation Links */}
-          <nav className="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm font-medium text-neutral-400">
+          {/* Zone 2: Navigation Links (hidden on mobile to prevent crowding, visible on tablet/laptop) */}
+          <nav className="hidden sm:flex items-center gap-4 sm:gap-5 text-xs sm:text-sm font-medium text-neutral-400">
             <a href="#about" className="hover:text-white transition-colors">
               About
             </a>
@@ -254,12 +254,12 @@ export default function App() {
               className="hover:text-white transition-colors flex items-center gap-1"
             >
               <span>Instagram</span>
-              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-60" />
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
             </a>
           </nav>
 
           {/* Zone 3: Primary Action & Owner indicator */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             {isOwnerAuth ? (
               <button
                 type="button"
@@ -267,10 +267,10 @@ export default function App() {
                   setTempStats(stats);
                   setIsEditorModalOpen(true);
                 }}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-lg transition-colors whitespace-nowrap cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs font-medium text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-lg transition-colors whitespace-nowrap cursor-pointer"
                 title="Edit views and followers"
               >
-                <Edit3 className="w-3.5 h-3.5" />
+                <Edit3 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 <span className="hidden sm:inline">Edit Stats</span>
               </button>
             ) : null}
@@ -279,14 +279,16 @@ export default function App() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-neutral-300 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors whitespace-nowrap"
+              className="p-1.5 sm:px-3 sm:py-1.5 text-xs font-medium text-neutral-300 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors flex items-center gap-1.5 shrink-0"
+              title="Instagram Profile"
+              aria-label="Instagram Profile"
             >
               <Instagram className="w-3.5 h-3.5 text-rose-400" />
-              <span>@velune_visuals_</span>
+              <span className="hidden md:inline">@velune_visuals_</span>
             </a>
             <a
               href="#contact"
-              className="px-3 sm:px-3.5 py-1.5 text-xs font-semibold text-black bg-gradient-to-r from-amber-300 to-amber-200 hover:from-amber-200 hover:to-white rounded-lg transition-all whitespace-nowrap shadow-sm"
+              className="px-3 sm:px-3.5 py-1.5 text-xs font-semibold text-black bg-gradient-to-r from-amber-300 to-amber-200 hover:from-amber-200 hover:to-white rounded-lg transition-all whitespace-nowrap shadow-sm shrink-0"
             >
               Reach Out
             </a>
@@ -295,9 +297,9 @@ export default function App() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-14 space-y-8 sm:space-y-12 overflow-x-hidden">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-3.5 sm:px-6 py-4 sm:py-8 md:py-12 space-y-6 sm:space-y-10 overflow-x-hidden">
         {/* Profile & Creative Identity Card */}
-        <section className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-neutral-900/50 p-5 sm:p-7 md:p-10">
+        <section className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-neutral-900/50 p-4 sm:p-6 md:p-8">
           {/* Dreamy Nature Backdrop */}
           <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
             <img
@@ -311,18 +313,18 @@ export default function App() {
 
           <div className="relative z-10">
             {/* Top Creator Metadata line */}
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-neutral-400 mb-5 sm:mb-6 font-medium">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-neutral-400 mb-4 sm:mb-5 font-medium flex-wrap">
               <span className="text-amber-300">Reel Creator & Video Editor</span>
-              <span aria-hidden="true">·</span>
+              <span className="text-neutral-600">·</span>
               <span>Cinematic Moments</span>
-              <span aria-hidden="true">·</span>
-              <span>Atmospheric Nature & Vibes</span>
+              <span className="text-neutral-600 hidden sm:inline">·</span>
+              <span className="hidden sm:inline">Atmospheric Nature & Vibes</span>
             </div>
 
             {/* Profile Header Row */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 mb-6">
+            <div className="flex items-center gap-3.5 sm:gap-5 mb-5 sm:mb-6">
               <div className="relative shrink-0">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full p-[2.5px] bg-gradient-to-tr from-amber-500 via-rose-500 to-indigo-500 shadow-lg">
+                <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full p-[2px] sm:p-[2.5px] bg-gradient-to-tr from-amber-500 via-rose-500 to-indigo-500 shadow-lg">
                   <img
                     src={officialLogo}
                     alt="Velune Visuals Avatar"
@@ -333,8 +335,8 @@ export default function App() {
               </div>
 
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight break-words">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h1 className="font-display text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight truncate">
                     Velune Visuals
                   </h1>
                   <button
@@ -347,32 +349,31 @@ export default function App() {
                         setIsPinModalOpen(true);
                       }
                     }}
-                    className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-800 border border-white/20 text-neutral-300 text-[10px] hover:border-amber-400/60 transition-colors cursor-pointer shrink-0"
+                    className="inline-flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-neutral-800 border border-white/20 text-neutral-300 text-[9px] sm:text-[10px] hover:border-amber-400/60 transition-colors cursor-pointer shrink-0"
                     title={isOwnerAuth ? 'Click to edit stats' : 'Verified Creator'}
                   >
                     ✓
                   </button>
                 </div>
-                <p className="text-xs sm:text-sm text-neutral-400 mt-1 break-words">
+                <p className="text-xs sm:text-sm text-neutral-400 mt-0.5 truncate">
                   @velune_visuals_ · Reel creator curating visual stories
                 </p>
 
                 {/* Dynamic Stats Row (Editable ONLY by Owner) */}
-                <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2 mt-3 text-xs text-neutral-300 font-medium">
-                  <div className="flex items-center gap-1.5 shrink-0">
+                <div className="flex flex-wrap items-center gap-2 mt-2.5 text-xs text-neutral-300 font-medium">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/5 shrink-0">
                     <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
                     <span className="text-emerald-400 font-semibold tabular-nums">
                       {stats.monthlyViews}
                     </span>
-                    <span className="text-neutral-400">Monthly Views</span>
+                    <span className="text-neutral-400 text-[11px]">Views</span>
                   </div>
-                  <span className="text-neutral-600">/</span>
-                  <div className="flex items-center gap-1.5 shrink-0">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/5 shrink-0">
                     <Eye className="w-3.5 h-3.5 text-neutral-400" />
                     <span className="font-semibold text-white tabular-nums">
                       {stats.followers}
                     </span>
-                    <span className="text-neutral-400">Followers</span>
+                    <span className="text-neutral-400 text-[11px]">Followers</span>
                   </div>
 
                   {/* Owner Controls Trigger */}
@@ -383,7 +384,7 @@ export default function App() {
                         setTempStats(stats);
                         setIsEditorModalOpen(true);
                       }}
-                      className="ml-1 inline-flex items-center gap-1 text-[11px] font-medium text-amber-300 hover:text-white px-2 py-0.5 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 transition-colors cursor-pointer shrink-0"
+                      className="inline-flex items-center gap-1 text-[11px] font-medium text-amber-300 hover:text-white px-2 py-1 rounded-md bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 transition-colors cursor-pointer shrink-0"
                       title="Update stats"
                     >
                       <Edit3 className="w-3 h-3" />
