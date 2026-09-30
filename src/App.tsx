@@ -226,7 +226,7 @@ export default function App() {
           {/* Zone 1: Single text wordmark with official PFP */}
           <a
             href="/"
-            className="font-display font-bold text-base sm:text-lg md:text-xl tracking-tight text-white hover:text-amber-200 transition-colors flex items-center gap-2 sm:gap-2.5 min-w-0 shrink"
+            className="font-display font-bold text-base sm:text-lg md:text-xl tracking-tight text-white hover:text-amber-200 transition-colors flex items-center gap-2 sm:gap-2.5 min-w-0 shrink-0"
           >
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-amber-500/40 p-[1.5px] bg-gradient-to-tr from-amber-600 via-rose-500 to-indigo-600 shrink-0">
               <img
@@ -236,7 +236,7 @@ export default function App() {
                 className="w-full h-full rounded-full object-cover"
               />
             </div>
-            <span className="truncate">Velune Visuals</span>
+            <span className="whitespace-nowrap">Velune Visuals</span>
           </a>
 
           {/* Zone 2: Navigation Links (hidden on mobile to prevent crowding, visible on tablet/laptop) */}
@@ -321,10 +321,11 @@ export default function App() {
               <span className="hidden sm:inline">Atmospheric Nature & Vibes</span>
             </div>
 
-            {/* Profile Header Row */}
-            <div className="flex items-center gap-3.5 sm:gap-5 mb-5 sm:mb-6">
+            {/* Profile Header Row (Avatar on left, Views & Followers on right side) */}
+            <div className="flex items-center gap-3.5 sm:gap-6 mb-4">
+              {/* Profile Avatar */}
               <div className="relative shrink-0">
-                <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full p-[2px] sm:p-[2.5px] bg-gradient-to-tr from-amber-500 via-rose-500 to-indigo-500 shadow-lg">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full p-[2.5px] bg-gradient-to-tr from-amber-500 via-rose-500 to-indigo-500 shadow-lg">
                   <img
                     src={officialLogo}
                     alt="Velune Visuals Avatar"
@@ -334,75 +335,79 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <h1 className="font-display text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight truncate">
-                    Velune Visuals
-                  </h1>
+              {/* Side of Profile Picture: Monthly Views & Followers */}
+              <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+                {/* Monthly Views */}
+                <div className="flex flex-col items-start px-3 py-2 rounded-xl bg-white/[0.05] border border-white/10 shrink-0">
+                  <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-sm sm:text-base tabular-nums">
+                    <TrendingUp className="w-3.5 h-3.5 shrink-0" />
+                    <span>{stats.monthlyViews}</span>
+                  </div>
+                  <span className="text-[11px] sm:text-xs text-neutral-400 font-medium">Monthly Views</span>
+                </div>
+
+                {/* Followers */}
+                <div className="flex flex-col items-start px-3 py-2 rounded-xl bg-white/[0.05] border border-white/10 shrink-0">
+                  <div className="flex items-center gap-1.5 text-white font-bold text-sm sm:text-base tabular-nums">
+                    <Eye className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+                    <span>{stats.followers}</span>
+                  </div>
+                  <span className="text-[11px] sm:text-xs text-neutral-400 font-medium">Followers</span>
+                </div>
+
+                {/* Owner Controls Trigger */}
+                {isOwnerAuth ? (
                   <button
                     type="button"
                     onClick={() => {
-                      if (isOwnerAuth) {
-                        setTempStats(stats);
-                        setIsEditorModalOpen(true);
-                      } else {
-                        setIsPinModalOpen(true);
-                      }
+                      setTempStats(stats);
+                      setIsEditorModalOpen(true);
                     }}
-                    className="inline-flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-neutral-800 border border-white/20 text-neutral-300 text-[9px] sm:text-[10px] hover:border-amber-400/60 transition-colors cursor-pointer shrink-0"
-                    title={isOwnerAuth ? 'Click to edit stats' : 'Verified Creator'}
+                    className="inline-flex items-center gap-1 text-[11px] font-medium text-amber-300 hover:text-white px-2.5 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 transition-colors cursor-pointer shrink-0"
+                    title="Update stats"
                   >
-                    ✓
+                    <Edit3 className="w-3 h-3" />
+                    <span className="hidden sm:inline">Edit</span>
                   </button>
-                </div>
-                <p className="text-xs sm:text-sm text-neutral-400 mt-0.5 truncate">
-                  @velune_visuals_ · Reel creator curating visual stories
-                </p>
-
-                {/* Dynamic Stats Row (Editable ONLY by Owner) */}
-                <div className="flex flex-wrap items-center gap-2 mt-2.5 text-xs text-neutral-300 font-medium">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/5 shrink-0">
-                    <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400 font-semibold tabular-nums">
-                      {stats.monthlyViews}
-                    </span>
-                    <span className="text-neutral-400 text-[11px]">Views</span>
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/5 shrink-0">
-                    <Eye className="w-3.5 h-3.5 text-neutral-400" />
-                    <span className="font-semibold text-white tabular-nums">
-                      {stats.followers}
-                    </span>
-                    <span className="text-neutral-400 text-[11px]">Followers</span>
-                  </div>
-
-                  {/* Owner Controls Trigger */}
-                  {isOwnerAuth ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setTempStats(stats);
-                        setIsEditorModalOpen(true);
-                      }}
-                      className="inline-flex items-center gap-1 text-[11px] font-medium text-amber-300 hover:text-white px-2 py-1 rounded-md bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 transition-colors cursor-pointer shrink-0"
-                      title="Update stats"
-                    >
-                      <Edit3 className="w-3 h-3" />
-                      <span>Edit</span>
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setIsPinModalOpen(true)}
-                      className="opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity p-1 text-neutral-600 hover:text-neutral-400 cursor-pointer shrink-0"
-                      title="Owner Login to edit stats"
-                      aria-label="Owner login to edit stats"
-                    >
-                      <Lock className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setIsPinModalOpen(true)}
+                    className="opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity p-1 text-neutral-600 hover:text-neutral-400 cursor-pointer shrink-0"
+                    title="Owner Login to edit stats"
+                    aria-label="Owner login to edit stats"
+                  >
+                    <Lock className="w-3 h-3" />
+                  </button>
+                )}
               </div>
+            </div>
+
+            {/* Name & Creator Handle (underneath avatar & stats) */}
+            <div className="space-y-1 mb-5 sm:mb-6">
+              <div className="flex items-center gap-2">
+                <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight whitespace-nowrap">
+                  Velune Visuals
+                </h1>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isOwnerAuth) {
+                      setTempStats(stats);
+                      setIsEditorModalOpen(true);
+                    } else {
+                      setIsPinModalOpen(true);
+                    }
+                  }}
+                  className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-neutral-800 border border-white/20 text-neutral-300 text-[10px] hover:border-amber-400/60 transition-colors cursor-pointer shrink-0"
+                  title={isOwnerAuth ? 'Click to edit stats' : 'Verified Creator'}
+                >
+                  ✓
+                </button>
+              </div>
+              <p className="text-xs sm:text-sm text-neutral-400 leading-snug">
+                @velune_visuals_ · Reel creator curating visual stories
+              </p>
             </div>
 
             {/* Bio Prose */}
@@ -417,16 +422,16 @@ export default function App() {
 
             {/* Primary Instagram Direct CTA */}
             <div className="p-4 sm:p-5 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0">
                 <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center shrink-0">
                   <Instagram className="w-5 h-5 text-white" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-sm font-semibold text-white flex items-center gap-1.5">
-                    <span>Follow & Watch Reels on Instagram</span>
+                    <span>Follow & Watch Reels</span>
                   </div>
                   <div className="text-xs text-neutral-400">
-                    Watch latest edits: nature, atmosphere, and moody vibes
+                    @velune_visuals_ · Latest edits & vibes
                   </div>
                 </div>
               </div>
